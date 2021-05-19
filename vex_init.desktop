@@ -1,0 +1,2 @@
+[Desktop Entry]
+Exec=lxterminal --command "/bin/bash -c 'sudo /home/pi/animations_on_boot.sh; /bin/bash'"
