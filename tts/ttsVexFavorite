@@ -1,0 +1,9 @@
+#ESpeak
+
+espeak -ven+f3 -k5 -s150 "Vex mark one initializing now. Good morning sir"
+
+#Pico text to speech
+
+pico2wave -w lookdave.wav "Look Dave, I can see you're really upset about this." && aplay lookdave.wav
+
+#You can also pipe the output by creating a symlink with the extension .wav to /dev/stdout
