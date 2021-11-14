@@ -12,10 +12,10 @@ void setup() {
     delay(10);
     status_brightness++;
   }
+  Serial.println("Status LED is online...");
 }
 
 void loop() {
-  Serial.println("Status LED is online...");
   analogWrite(status_blue, 255);
 //  Everything below this line is for making the status led pulse without delays.
 //  static float in = 4.712;
