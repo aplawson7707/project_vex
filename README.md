@@ -28,3 +28,4 @@ Create the folder for the person first, then open headshots.picam.py, change the
 Take about 10 images for the new face and some from odd angles to help the machine learning process recognize the face.<br>
 cd into the home/facial_recognition directory and run "$ python train_model.py" to train the model on the new dataset.<br>
 Once the model has finished training on the new data, run "$ python facial_req.py" to begin facial recognition.<br>
+A full tutorial can be found at https://www.tomshardware.com/how-to/raspberry-pi-facial-recognition<br>
