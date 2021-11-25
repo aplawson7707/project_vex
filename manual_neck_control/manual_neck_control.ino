@@ -3,27 +3,55 @@
 
 #define  I2CAdd 0x40
 HCPCA9685 HCPCA9685(I2CAdd);
+
 int joyX = 0;
 int joyY = 1;
-int joyVal;
-int joyValLeft;
-int joyValRight;
+
+int pan;
+int tilt;
+int tiltLeft;
+int tiltRight;
+
+int panPrev;
+int tiltLeftPrev;
+int tiltRightPrev;
+
+int smoothedPan;
+int smoothedTilt;
+int smoothedTiltLeft;
+int smoothedTiltRight;
 
 void setup() {
   HCPCA9685.Init(SERVO_MODE);
   HCPCA9685.Sleep(false);
+  pan = analogRead(joyX);
+  pan = map(pan, 0, 1023, 90, 400);
+  tilt = analogRead(joyY);
+  tiltLeft = map(tilt, 0, 1023, 50, 350);
+  tiltRight = map(tilt, 0, 1023, 350, 50);
+  HCPCA9685.Servo(0, tiltLeft);
+  HCPCA9685.Servo(1, tiltRight);
+  HCPCA9685.Servo(2, pan);
+  panPrev = pan;
+  tiltLeftPrev = tiltLeft;
+  tiltRightPrev = tiltRight;
 }
 
 void loop() {
-//  unsigned int Pos;/
-  joyVal = analogRead(joyX);
-  joyVal = map(joyVal, 0, 1023, 90, 350);
-  HCPCA9685.Servo(2,joyVal);
+  pan = analogRead(joyX);
+  pan = map(pan, 0, 1023, 90, 400);
+  smoothedPan = (pan * .02) + (panPrev * .98);
+  panPrev = smoothedPan;
+  HCPCA9685.Servo(2,smoothedPan);
 
-  joyVal = analogRead(joyY);
-  joyValLeft = map(joyVal, 0, 1023, 50, 350);
-  joyValRight = map(joyVal, 0, 1023, 350, 50);
-  HCPCA9685.Servo(0, joyValLeft);
-  HCPCA9685.Servo(1, joyValRight);
-  delay(50);
+  tilt = analogRead(joyY);
+  tiltLeft = map(tilt, 0, 1023, 50, 350);
+  smoothedTiltLeft = (tiltLeft * .02) + (tiltLeftPrev * .98);
+  tiltLeftPrev = smoothedTiltLeft;
+  tiltRight = map(tilt, 0, 1023, 350, 50);
+  smoothedTiltRight = (tiltRight * .02) + (tiltRightPrev * .98);
+  tiltRightPrev = smoothedTiltRight;
+  HCPCA9685.Servo(0, smoothedTiltLeft);
+  HCPCA9685.Servo(1, smoothedTiltRight);
+  delay(5);
 }
