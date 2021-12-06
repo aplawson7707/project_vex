@@ -1,7 +1,8 @@
 # project_vex
 
 <p>This project is the very beginning of a project to build a simple, interactive robot for handling IOT tasks and integrations.</p>
-<h2>Voice Assistant</h2>
+
+<h2>Voice Assistant [DEPRECATED]</h2>
 <h3>Dependencies</h3>
 `pip install SpeechRecognition`<br>
 `pip install gTTS`<br>
@@ -15,9 +16,9 @@
 <h2>Animations on Boot</h2>
 <p>The animated standby graphic plays on boot. <br>
 vex_init.desktop lives inside /etc/xdg/autostart/ to launch lxterminal inside of RPi4 boot process once gui is loaded.<br>
-Make sure animations_on_boot.sh is stored in /home/pi for easy access by animations_on_boot.sh</p>
+Make sure animations_on_boot.sh is stored in /home/pi/projects/project_vex for easy access by animations_on_boot.sh</p>
 
-<h2>Facial Recognition</h2>
+<h2>Facial Recognition [TODO: Resolve dependencies and port to project_vex venv]</h2>
 <p>This capability relies on the following repository: <br>
 https://github.com/carolinedunn/facial_recognition<br>
 This repo is cloned into the home directory.<br>
