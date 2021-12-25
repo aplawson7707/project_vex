@@ -11,5 +11,5 @@ def speak(message):
     }
     requests.post(url, headers=headers, data=message)
 
-speak("All systems are online. I am at your service.")
+speak("Good morning. Vocalization protocol is operational. How can I assist you today?")
     
