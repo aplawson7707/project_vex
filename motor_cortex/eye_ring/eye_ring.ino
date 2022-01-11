@@ -49,7 +49,7 @@ static float delta = (valueMax - valueMin) / 2.35040238;  // Do Not Edit
 
 //---------------------------------------------------------------
 void setup(){
-  Serial.begin(115200);  // Allows serial monitor output (check baud rate)
+  Serial.begin(57600);  // Allows serial monitor output (check baud rate)
   delay(2000);  // Startup delay
   FastLED.addLeds<LED_TYPE, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
@@ -77,5 +77,10 @@ void loop(){
   }
 
   FastLED.show();
+  if (Serial.available() > 0) {
+    int msg = Serial.read() - '0';
+    Serial.print("Command received: ");
+    Serial.println(msg);
+  };
    
 } // end_main_loop
