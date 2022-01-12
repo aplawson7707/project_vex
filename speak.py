@@ -16,16 +16,18 @@ greetings = [
 
 random_greeting = random.randrange(len(greetings))
 
+# if __name__ == '__main__':
+
 def speak(message):
     message=message
     url = 'http://localhost:12101/api/text-to-speech?play=true'
     headers = {
-    	'accept': 'audio/wav',
-    	'Content-Type': 'text/plain'
+        'accept': 'audio/wav',
+        'Content-Type': 'text/plain'
     }
     requests.post(url, headers=headers, data=message)
 
-speak(greetings[random_greeting] + " fellow human.")
-speak("I can talk just like a person. Blah blah blah.")
-speak("The human torch was denied a bank loan.")
-speak("Your mother was a hamster and your father smelt of elderberries.")
+# speak(greetings[random_greeting] + " fellow human.")
+# speak("I can talk just like a person. Blah blah blah.")
+# speak("The human torch was denied a bank loan.")
+# speak("Your mother was a hamster and your father smelt of elderberries.")

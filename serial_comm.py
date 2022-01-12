@@ -1,19 +1,32 @@
 #!/usr/bin/python3
 
-import serial
-import time
-import random
+# -*- coding: utf-8 -*-
+# lsusb to check device name
+#dmesg | grep "tty" to find port name
+
+import serial,time
+from speak import speak
 
 if __name__ == '__main__':
-    ser = serial.Serial('/dev/ttyACM0', 57600, timeout=1)
-    ser.reset_input_buffer()
 
-    while True:
-        # if ser.in_waiting > 0:
-        #     line = ser.readline().decode('utf-8').rstrip()
-        #     print(line)
-        number = random.randint(1, 5)
-        ser.write(str(number).encode('utf-8'))
-        line = ser.readline().decode('utf-8').rstrip()
-        print(line)
-        time.sleep(1)
+    speak("Establishing link with motor cortex.")
+    print('Running. Press CTRL-C to exit.')
+    with serial.Serial("/dev/ttyACM0", 9600, timeout=1) as arduino:
+        time.sleep(0.1) #wait for serial to open
+        if arduino.isOpen():
+            speak("Cortex link established.")
+            print("{} connected!".format(arduino.port))
+            try:
+                while True:
+                    cmd=input("Enter command : ")
+                    arduino.write(cmd.encode())
+                    #time.sleep(0.1) #wait for arduino to answer
+                    while arduino.inWaiting()==0: pass
+                    if  arduino.inWaiting()>0: 
+                        answer=arduino.readline()
+                        speak(answer)
+                        print(answer)
+                        arduino.flushInput() #remove data after reading
+            except KeyboardInterrupt:
+                speak("Disconnecting from motor cortex.")
+                print("KeyboardInterrupt has been caught.")
