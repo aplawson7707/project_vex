@@ -39,7 +39,7 @@ speak("Facial recognition activated.")
 #Initialize 'currentname' to trigger only when a new person is identified.
 currentname = "Unrecognized"
 #Determine faces from encodings.pickle file model created from train_model.py
-encodingsP = "encodings.pickle"
+encodingsP = "/home/pi/projects/project_vex/facial_recognition/encodings.pickle"
 
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
