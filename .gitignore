@@ -3,3 +3,5 @@
 /facial_recognition/.git
 voice.mp3
 facial_recognition/dataset
+__pycache__
+*.pyc
