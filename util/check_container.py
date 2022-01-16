@@ -2,6 +2,7 @@
 
 from typing import Optional
 import docker
+from speak import speak
 
 def is_container_running(container_name: str) -> Optional[bool]:
     """ Verify the status of a container by name
@@ -24,3 +25,5 @@ if __name__ == "__main__":
     container_name = "rhasspy"
     result = is_container_running(container_name)
     print(result)
+    if result == True:
+        speak("Vocalization protocol is running and active")
