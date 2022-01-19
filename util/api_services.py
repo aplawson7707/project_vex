@@ -6,6 +6,7 @@ import requests
 import json
 from geopy.geocoders import Nominatim
 from speak import speak
+import wikipediaapi
 
 def getCrypto():
     coin='shib'
@@ -86,3 +87,17 @@ def getRonSwansonQuote():
     response = requests.get(url)
     quote = response.text
     speak(quote)
+
+def getWikipediaPage(subject: str):
+    wiki_wiki = wikipediaapi.Wikipedia('en')
+    page = wiki_wiki.page(subject)
+    if page.exists() == True:
+        summary_encoded = page.summary.encode('utf-8')
+        summary_length = len(page.summary)
+        speak(f"Researching {subject}. Please stand by.")
+        speak(summary_encoded[0:200])
+    else:
+        speak(f"I'm sorry sir. I could not find any information on {subject}")
+
+getWikipediaPage("Carrots")
+
